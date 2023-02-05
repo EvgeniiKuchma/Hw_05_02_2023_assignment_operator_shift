@@ -4,13 +4,12 @@
 class Car {
 public:
 	explicit Car(size_t num = 0) : _size(num), 
-		_acceleration("Vwoom...vwoommm...vwooommm..."), _brake("Screechsk..."){log("constructor\n");}
+		_acceleration("Vwoom...vwoommm...vwooommm..."){log("constructor\n");}
 	
-	Car(const Car& other) : _size(other._size), _acceleration("Vwoom...vwoommm...vwooommm..."), _brake("Screechsk...") {
+	Car(const Car& other) : _size(other._size), _acceleration("Vwoom...vwoommm...vwooommm..."){
 		log("copy constructor\n");
 		for (size_t i = 0; i < _size; i++) {
 			_acceleration[i] = other._acceleration[i];
-			_brake[i] = other._brake[i];
 		}
 	}
 	
@@ -33,16 +32,12 @@ public:
 		std::cout << _acceleration << std::endl;
 	}
 	
-	void push_brake() {
-		std::cout << _brake << std::endl;
-	}
 private:
 	
 	void log(const char* msg) {
 		std::cout << "[" << this << "]" << msg<< "\n";
 	}
 	std::string _acceleration;
-	std::string _brake;
 	size_t _size;
 };
 int main() {
@@ -50,8 +45,8 @@ int main() {
 	Car v2;
 	Car v3;
 	v1.push_acceleration();
-	v1.push_brake();
 	std::cout << "++++++++++++++++++++++++" << std::endl;
+	v2 = v1;
 	v3 = std::move(v1);
 	return 0;
 }
