@@ -4,7 +4,7 @@
 class Car {
 public:
 	explicit Car(size_t num = 0) : _size(num), _data(new int[_size]), _acceleration("\nVwoom...vwoommm...vwooommm...\n")
-	{log("constructor");}
+	{log("Constructor");}
 	
 	~Car() {
 		log("Deconstructor");
@@ -13,17 +13,17 @@ public:
 			_data = nullptr;
 		}
 	}
-	Car(const Car& other) : _size(other._size), _data(new int[_size]), _acceleration("\nVwoom...vwoommm...vwooommm...\n")
+	Car(const Car& other) : _size(other._size), _data(new int[_size]), _acceleration("\nVwoom...vwoommm...vwooommm...\n")//craete tmp;
 	{
-		log("copy constructor");
+		log("Copy constructor");
 		_acceleration = other._acceleration;
 		for (size_t i = 0; i < _size; i++) {
-			_data = other._data;
+			_data[i] = other._data[i];
 		}
 	}
 	
 	Car& operator=(const Car& other){
-		log("copy assigment operator");
+		log("Copy assigment operator");
 		Car tmp(other);
 		std::swap(_acceleration, tmp._acceleration);
 		std::swap(_size, tmp._size);
@@ -32,7 +32,7 @@ public:
 	}
 	
 	Car& operator=(Car&& other) noexcept {
-		log("move assigment operation");
+		log("Move assigment operation");
 		std::swap(_acceleration, other._acceleration);
 		std::swap(_size, other._size);
 		std::swap(_data, other._data);
